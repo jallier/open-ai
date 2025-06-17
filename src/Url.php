@@ -192,4 +192,9 @@ class Url
     {
         return self::OPEN_AI_URL . "/vector_stores";
     }
+
+    public static function evalsUrl(): string
+    {
+        return self::OPEN_AI_URL . "/evals";
+    }
 }

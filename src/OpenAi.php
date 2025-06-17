@@ -961,6 +961,106 @@ class OpenAi
     }
 
     /**
+     * @param array $data
+     * @return bool|string
+     * @throws Exception
+     */
+    public function createEval(array $data)
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl();
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'POST', $data);
+    }
+
+    /**
+     * @param string $evalId
+     * @return bool|string
+     * @throws Exception
+     */
+    public function retrieveEval(string $evalId)
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl() . '/' . $evalId;
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'GET');
+    }
+
+    /**
+     * @param string $evalId
+     * @param array $data
+     * @return bool|string
+     * @throws Exception
+     */
+    public function modifyEval(string $evalId, array $data)
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl() . '/' . $evalId;
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'POST', $data);
+    }
+
+    /**
+     * @return bool|string
+     * @throws Exception
+     */
+    public function listEvals()
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl();
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'GET');
+    }
+
+    /**
+     * @param string $evalId
+     * @return bool|string
+     * @throws Exception
+     */
+    public function retrieveEvalRuns(string $evalId)
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl() . '/' . $evalId . '/runs';
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'GET');
+    }
+
+    /**
+     * @param string $evalId
+     * @param string $runId
+     * @return bool|string
+     * @throws Exception
+     */
+    public function retrieveEvalRun(string $evalId, string $runId)
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl() . '/' . $evalId . '/runs/' . $runId;
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'GET');
+    }
+
+    /**
+     * @param string $evalId
+     * @param array $data
+     * @return bool|string
+     * @throws Exception
+     */
+    public function createEvalRun(string $evalId, array $data)
+    {
+        $this->addAssistantsBetaHeader();
+        $url = Url::evalsUrl() . '/' . $evalId . '/runs';
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'POST', $data);
+    }
+
+    /**
      * @param  int  $timeout
      */
     public function setTimeout(int $timeout)
