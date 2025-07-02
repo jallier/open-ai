@@ -162,6 +162,14 @@ class Url
     }
 
     /**
+     * @return string
+     */
+    public static function responsesUrl(): string
+    {
+        return self::OPEN_AI_URL . "/responses";
+    }
+
+    /**
      * @param
      * @return string
      */

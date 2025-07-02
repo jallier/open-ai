@@ -1061,6 +1061,31 @@ class OpenAi
     }
 
     /**
+     * @param array $opts
+     * @param callable|null $stream
+     * @return bool|string
+     * @throws Exception
+     */
+    public function createResponse(array $opts, callable $stream = null)
+    {
+        if ($stream !== null && array_key_exists('stream', $opts)) {
+            if (!$opts['stream']) {
+                throw new Exception(
+                    'Please provide a stream function. Check '
+                );
+            }
+
+            $this->stream_method = $stream;
+        }
+
+        $opts['model'] = $opts['model'] ?? $this->chatModel;
+        $url = Url::responsesUrl();
+        $this->baseUrl($url);
+
+        return $this->sendRequest($url, 'POST', $opts);
+    }
+
+    /**
      * @param  int  $timeout
      */
     public function setTimeout(int $timeout)
